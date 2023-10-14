@@ -19,7 +19,8 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgresql://myuser:mypassword@postgres:5432/mydatabase
+      SQLALCHEMY_DATABASE_URI: postgresql://myuser:mypassword@postgres:5432/mydatabase
+
 
 volumes:
   postgres_data:

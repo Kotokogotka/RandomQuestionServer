@@ -2,11 +2,23 @@ import logging
 import requests
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from models import Question
+
 
 app = Flask(__name__)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
+
+
+# Определение моделей SQLAlchemy
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    question_id = db.Column(db.Integer, unique=True, nullable=False)  # Исправлено здесь
+    question_text = db.Column(db.String(500), nullable=False)  # Исправлено здесь
+    answer_text = db.Column(db.String(500), nullable=False)  # Исправлено здесь
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+
+    def __repr__(self):
+        return f'<Question {self.question_text}>'
 
 
 # Регистрация маршрутов Flask
@@ -44,7 +56,6 @@ def get_questions():
 
         logging.info(f'Response sent with {len(questions)} questions')
         return jsonify(questions)
-
     except Exception as error:
         # Обработка остльных ошибок
         logging.error(f'Error {str(error)}')
