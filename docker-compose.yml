@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: my-python-project
+    ports:
+      - "543:5432"
+    environment:
+      POSTGRES_DB: bewise
+      POSTGRES_USER: junior
+      POSTGRES_PASSWORD: 23102023
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://myuser:mypassword@postgres:5432/mydatabase
+
+volumes:
+  postgres_data:
+
