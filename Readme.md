@@ -49,7 +49,6 @@ curl -X POST -H "Content-Type: application/json" -d '{"questions_num": 3}' http:
 ## Структура проекта
 
 - `app.py`: Основной файл приложения, содержит код Flask-приложения и его маршруты.
-- `models.py`: Определение модели SQLAlchemy для взаимодействия с базой данных.
 - `config.py`: Конфигурационный файл для настройки приложения.
 - `docker-compose.yml`: Файл конфигурации Docker Compose для запуска сервиса и базы данных PostgreSQL.
 - `Dockerfile`: Файл для сборки Docker-образа приложения.
