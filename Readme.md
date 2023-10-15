@@ -40,7 +40,7 @@
 Вы можете отправить POST запрос к сервису, чтобы получить случайные вопросы. Пример запроса с использованием `curl`:
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{"questions_num": 3}' http://localhost:5433/api/questions
+curl -X POST -H "Content-Type: application/json" -d '{"questions_num": 3}' http://localhost:5000/api/questions
 ```
 
 Где:
