@@ -41,6 +41,9 @@
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{"questions_num": 3}' http://localhost:5000/api/questions
+или
+curl -X POST -H "Content-Type: application/json" -d '{"questions_num": 3}'  http://0.0.0.0:5000/api/questions
+
 ```
 
 Где:
