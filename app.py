@@ -1,39 +1,39 @@
-import requests
+from typing import List, Dict
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///questions.db'
-db = SQLAlchemy(app)
+db: SQLAlchemy = SQLAlchemy(app)
 
 class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    question_id = db.Column(db.Integer, unique=True, nullable=False)
-    question_text = db.Column(db.String(500), nullable=False)
-    answer_text = db.Column(db.String(500), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    id: int = db.Column(db.Integer, primary_key=True)
+    question_id: int = db.Column(db.Integer, unique=True, nullable=False)
+    question_text: str = db.Column(db.String(500), nullable=False)
+    answer_text: str = db.Column(db.String(500), nullable=False)
+    created_at: datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'<Question {self.question_text}>'
 
 @app.route('/api/questions', methods=['POST'])
-def get_questions():
-    data = request.get_json()
-    questions_num = data.get('questions_num', 1)
-    questions = []
+def get_questions() -> str:
+    data: Dict[str, int] = request.get_json()
+    questions_num: int = data.get('questions_num', 1)
+    questions: List[Dict[str, any]] = []
 
     while len(questions) < questions_num:
-        response = requests.get(f'https://jservice.io/api/random?count={questions_num}')
-        question_data = response.json()[0]
-        question_id = question_data['id']
-        question_text = question_data['question']
-        answer_text = question_data['answer']
+        response: requests.Response = requests.get(f'https://jservice.io/api/random?count={questions_num}')
+        question_data: Dict[str, any] = response.json()[0]
+        question_id: int = question_data['id']
+        question_text: str = question_data['question']
+        answer_text: str = question_data['answer']
 
-        existing_question = Question.query.filter_by(question_id=question_id).first()
+        existing_question: Question = Question.query.filter_by(question_id=question_id).first()
 
         if existing_question is None:
-            new_question = Question(question_id=question_id, question_text=question_text, answer_text=answer_text)
+            new_question: Question = Question(question_id=question_id, question_text=question_text, answer_text=answer_text)
             db.session.add(new_question)
             db.session.commit()
             questions.append({
