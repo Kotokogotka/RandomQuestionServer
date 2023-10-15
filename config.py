@@ -5,4 +5,4 @@ from dotenv import load_dotenv
 load_dotenv('postgres.env')
 
 SECRET_KEY = os.urandom(24)  # Секретный ключ Flask
-SQLALCHEMY_DATABASE_URI = 'postgresql://junior:23102023@postgres:5432/bewise'
+SQLALCHEMY_DATABASE_URI: str = 'postgresql://junior:23102023@postgres:5432/bewise'
