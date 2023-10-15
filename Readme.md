@@ -68,7 +68,7 @@ services:
   postgres:
     image: my-python-project
     ports:
-      - "543:5432"
+      - "5434:5432"
     environment:
       POSTGRES_DB: bewise
       POSTGRES_USER: junior
@@ -83,10 +83,11 @@ services:
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgresql://myuser:mypassword@postgres:5432/mydatabase
+      SQLALCHEMY_DATABASE_URI: postgresql://junior:23102023@postgres:5434/bewise  # Изменил порт на 5434
 
 volumes:
   postgres_data:
+
 ```
 
 ### `Dockerfile`
