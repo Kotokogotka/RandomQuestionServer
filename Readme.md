@@ -22,7 +22,7 @@
    ```env
    POSTGRES_USER=junior
    POSTGRES_PASSWORD=23102023
-   POSTGRES_DB=bewise
+   POSTGRES_DB=RandomQuestionServer
    ```
 
 4. Соберите Docker-образ:
@@ -70,7 +70,7 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_DB: bewise
+      POSTGRES_DB: RandomQuestionServer
       POSTGRES_USER: junior
       POSTGRES_PASSWORD: 23102023
     volumes:
@@ -114,6 +114,6 @@ CMD ["python", "app.py"]
 ```env
 POSTGRES_USER=junior
 POSTGRES_PASSWORD=23102023
-POSTGRES_DB=bewise
+POSTGRES_DB=RandomQuestionServer
 ```
 
